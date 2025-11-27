@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animal Health Check</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .animal-type-section {
+      background-color: #e8f5e9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    select {
+      width: 200px;
+      padding: 8px;
+    }
+
+    .symptoms-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .symptom-item {
+      padding: 12px;
+      background: #f4f4f4;
+      border-radius: 4px;
+    }
+
+    .check-health-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Animal Health Checker</h1>
+
+  <form action="/submit" method="post">
+    <div class="animal-type-section">
+      <label>Animal Type:</label>
+      <select name="animalName" required>
+        <option value="">Select Animal</option>
+        {% for animal in animals %}
+        <option value="{{ animal }}">{{ animal }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <h2>Symptoms</h2>
+    <div class="symptoms-grid">
+      {% for sym in symptoms %}
+      <div class="symptom-item">
+        <label>
+          <input type="checkbox" name="symptom_{{ sym }}" value="1">
+          {{ sym.replace('_',' ').title() }}
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+
+    <button class="check-health-btn">Check Health</button>
+  </form>
+</body>
+
+</html>
